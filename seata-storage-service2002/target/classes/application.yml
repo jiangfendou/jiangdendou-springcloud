@@ -1,0 +1,54 @@
+server:
+  port: 2002
+
+spring:
+  application:
+    name: seata-storage-service
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
+    nacos:
+      discovery:
+        server-addr: 8.136.17.98:8848
+#      config:
+#        server-addr: 8.136.17.98:8848
+#        file-extension: yaml
+#        group: SHARE_GROUP
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_storage?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root123
+
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+#seata:
+#  registry:
+#    type: nacos
+#    nacos:
+#      server-addr: 8.136.17.98:8848
+#      # 默认
+#      application: seata-server
+#      username: nacos
+#      password: nacos
+#      namespace: 916a8d4a-4d6e-433d-9534-71ebbd47865a
+#  config:
+#    type: nacos
+#    nacos:
+#      server-addr: 8.136.17.98:8848
+#      namespace: 916a8d4a-4d6e-433d-9534-71ebbd47865a
+#      username: nacos
+#      password: nacos
+

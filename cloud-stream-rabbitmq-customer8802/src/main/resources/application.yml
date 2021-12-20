@@ -1,0 +1,40 @@
+server:
+  port: 8802
+
+spring:
+  application:
+    name: mq-service-consumer
+  rabbitmq:
+    host: 8.136.17.98
+    port: 5672
+    username: admin
+    password: jmh123
+  cloud:
+    stream:
+      binders:
+        message-center-input:
+          destination: message-center
+      rabbit:
+        bindings:
+          message-center-input:
+            consumer:
+              delayedExchange: true
+              #开启死信队列
+              autoBindDlq: true
+              dlqTtl: 86400000
+              #区分异常添加到死信队列
+              republishToDlq: true
+      bindings:
+        message-center:
+          group: jiangfendouA
+          consumer:
+            maxAttempts: 1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的间隔时间，默认30
+    lease-expiration-duration-in-seconds: 5 # 超过5秒间隔，默认90
+    instance-id: send-8801.com # 主机名
+    prefer-ip-address: true # 显示ip

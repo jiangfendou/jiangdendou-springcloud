@@ -1,0 +1,37 @@
+server:
+  port: 3355
+spring:
+  application:
+    name: config-client
+  cloud:
+    #config客户端配置
+    config:
+      label: master #分支名称
+      name: config #配置文件名称
+      profile: dev #读取后缀名称
+      uri: http://localhost:3344
+  #读取rabbitMQ的相关配置
+  rabbitmq:
+    host: 8.136.17.98
+    port: 5672
+    username: admin
+    password: jmh123
+
+# eureka client
+eureka:
+  client:
+    # 表示是否将自己注册进eureka server 默认 true
+    register-with-eureka: true
+    # 表示是否冲eureka server抓取自己的注册信息，默认true。单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      # Eureka 集群
+      # defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+      defaultZone: http://eureka7001.com:7001/eureka
+
+#暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

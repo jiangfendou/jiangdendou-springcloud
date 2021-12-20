@@ -1,0 +1,21 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: consul-provider-payment
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&charterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #consul 注册中心的地址
+  cloud:
+    consul:
+      host: 8.136.17.98
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        hostname: 8.136.17.98
+        health-check-url: http://8.136.17.98:8500

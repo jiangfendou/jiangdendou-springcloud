@@ -1,0 +1,46 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-order-fegin-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&charterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jiangfendou.springcloud.entities
+
+
+# eureka client
+eureka:
+  client:
+    # 表示是否将自己注册进eureka server 默认 true
+    register-with-eureka: true
+    # 表示是否冲eureka server抓取自己的注册信息，默认true。单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+#      defaultZone:  http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+      defaultZone:  http://eureka7001.com:7001/eureka
+  instance:
+    instance-id: jiangfendou:consumer80
+    prefer-ip-address: true
+
+project:
+  payment:
+    url: http://cloud-payment-service/payment/
+
+#设置feign客户端的超时时间（OpenFeign默认支持ribbon）
+ribbon:
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    jiangfendou.springcloud.service.*: debug

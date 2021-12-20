@@ -1,0 +1,38 @@
+server:
+  port: 8004
+
+spring:
+  application:
+    name: cloud-payment-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&charterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#   zookeeper
+  cloud:
+    zookeeper:
+      connect-string: 8.136.17.98:2181
+      discovery:
+        enabled: true   #是否启用zookeeper
+        register: true   #是否注册微服务
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jiangfendou.springcloud.
+
+#eureka:
+#  client:
+#    # 表示是否将自己注册进eureka server 默认 true
+#    register-with-eureka: true
+#    # 表示是否冲eureka server抓取自己的注册信息，默认true。单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+#  instance:
+#    instance-id: jiangfendou:payment8004
+#    #获取服务的IP地址
+#    prefer-ip-address: true
+
+

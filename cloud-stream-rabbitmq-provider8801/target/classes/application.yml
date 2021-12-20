@@ -1,0 +1,29 @@
+server:
+  port: 8801
+
+spring:
+  application:
+    name: mq-service-producer
+  rabbitmq:
+    host: 8.136.17.98
+    port: 5672
+    username: admin
+    password: jmh123
+  cloud:
+    stream:
+      binders:
+        message-center-out:
+          destination: message-center
+          consumer:
+            exchangeType: fanout
+          producer:
+            delayedExchange: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的间隔时间，默认30
+    lease-expiration-duration-in-seconds: 5 # 超过5秒间隔，默认90
+    instance-id: send-8801.com # 主机名
+    prefer-ip-address: true # 显示ip
